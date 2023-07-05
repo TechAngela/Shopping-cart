@@ -5,7 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { router as productRoute } from "../Routes/productRoute";
-import home from "../Routes/homeRoute"
+import home from "../Routes/homeRoute";
+import {router as cartRoute} from "../Routes/cartRoute"
 dotenv.config();
 const app = express();
 const port = 5500;
@@ -28,6 +29,7 @@ app.use(cookieParser()) ;
 app.use(cors());
 app.use("/api/v1/", productRoute)
 app.use("/",home)
+app.use("/api/v1/",cartRoute)
 // create an instance of the application
 
 
