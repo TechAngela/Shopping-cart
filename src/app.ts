@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { router as productRoute } from "../Routes/productRoute";
+import home from "../Routes/homeRoute"
 dotenv.config();
 const app = express();
 const port = 5500;
@@ -26,10 +27,9 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser()) ;
 app.use(cors());
 app.use("/api/v1/", productRoute)
+app.use("/",home)
 // create an instance of the application
-app.get("/",(req: Request,res:Response)=>{
-    return res.status(200).send("<h1>Hello</h1>"); // send response to client side
-});
+
 
 app.listen(port , () =>{
      console.log(`Server is running at ${port}`);
