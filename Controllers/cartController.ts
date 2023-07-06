@@ -13,15 +13,13 @@ const createCart = async (req: any, res: any): Promise<any> => {
           } else {
                const name = found.name
                const amount = found.amount
-               const Quantity = found.Quantity
                res.status(200).json({
-                    message: " product added successfully on cart", name, amount, Quantity
+                    message: " product added successfully on cart", name, amount
                })
 
                const selected = new Cart({
                     name: found.name,
                     amount: amount,
-                    Quantity: Quantity
                })
                selected.save()
           }
@@ -82,20 +80,23 @@ const updateProduct = async (req: any, res: any): Promise<any> => {
                     found,
                });
           } else {
+               const name: any = found.name;
                const amount: any = found.amount;
-               const currentQuantity: any = found.Quantity;
-               const newQuantity = currentQuantity + 1;
+              const newQuantity: any = req.body.Quantity;
                const newTotalAmount = newQuantity * amount;
                //     Cart.amount = newTotalAmount;
-               let updatedData = {
+               
+              
+           let updatedData = new Cart({
                     ...data,
+                    name: name,
                     Quantity: newQuantity,
-                    total_price: newTotalAmount
-               }
-               res.status(200).json({
+                    amount: newTotalAmount,
+                    })
+                     res.status(200).json({
                     message: " data updated successfully on cart", updatedData
                })
-               console.log("data updated", updatedData)
+                    updatedData.save();
           }
      } catch (error) {
           console.log("Error occurred while updating the cart", error);
