@@ -84,9 +84,7 @@ const updateProduct = async (req: any, res: any): Promise<any> => {
                const amount: any = found.amount;
               const newQuantity: any = req.body.Quantity;
                const newTotalAmount = newQuantity * amount;
-               //     Cart.amount = newTotalAmount;
-               
-              
+  
            let updatedData = new Cart({
                     ...data,
                     name: name,
@@ -96,7 +94,7 @@ const updateProduct = async (req: any, res: any): Promise<any> => {
                      res.status(200).json({
                     message: " data updated successfully on cart", updatedData
                })
-                    updatedData.save();
+               
           }
      } catch (error) {
           console.log("Error occurred while updating the cart", error);
